@@ -85,7 +85,7 @@
                         </li>
                         <li class="divider">
                         <li>
-                            <a href="#">
+                            <a href="created_plan_by_AI_criteria.php">
                                 <span class='fa fa-edit fa-lg' style="color:navy"></span>
                                 การจัดการใบวางบิล [By Computer]
                             </a>
