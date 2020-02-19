@@ -1,75 +1,71 @@
 <?php
     /*
-    echo $_POST['edit_billing_type'] ;
-    echo $_POST['edit_responsed_by'] ;
-    echo $_POST['edit_planning_billing_date'] ;
-    echo $_POST['edit_planning_cheque_date'] ;
+    echo $_POST['edit_bill_type'] . "<br>";
+    echo $_POST['edit_bill_responsed_by'] . "<br>";
+    echo $_POST['edit_bill_plan_date'] . "<br>";
+
+    echo $_POST['edit_payment_type'] . "<br>";
+    echo $_POST['edit_payment_responsed_by'] . "<br>";
+    echo $_POST['edit_payment_plan_date'] . "<br>";
     */
 
     try
     {
         include('include/db_Conn.php');
 
-        switch($_POST["edit_billing_type"])
+        // -----------------
+        // แก้ไข ข้อมูล วางบิล
+        // -----------------
+        switch($_POST["edit_bill_type"])
         {
+            case 0:
+                $strSql = "UPDATE TRN_BILL SET ";
+                $strSql .= "bill_type='" . $_POST["edit_bill_type"] . "', ";
+                $strSql .= "bill_responsed_by='". $_POST["edit_bill_responsed_by"] . "', ";
+                $strSql .= "bill_plan_date = NULL ";
+                $strSql .= "WHERE internal_billing_no='" . $_POST["edit_paraminternal_billing_no"] . "' ";
+                $strSql .= "AND job_type='B' ";
+                //echo $strSql . "<br>";
+        
+                $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+                $statement->execute();  
+                $nRecCount = $statement->rowCount();
+                //echo $nRecCount . "<br>";                
+                break;
             case 1:
-                $strSql = "UPDATE TRN_PLANNING_BILLING SET ";
-                $strSql .= "billing_type='" . $_POST["edit_billing_type"] . "', ";
-                $strSql .= "responsed_by='" . $_POST["edit_responsed_by"] . "', ";
-                $strSql .= "planning_date='" . $_POST["edit_planning_billing_date"] . "' ";
+            case 2:
+            case 3:
+            case 4:
+                $strSql = "UPDATE TRN_BILL SET ";
+                $strSql .= "bill_type='" . $_POST["edit_bill_type"] . "', ";
+                $strSql .= "bill_responsed_by='" . $_POST["edit_bill_responsed_by"] . "', ";
+                $strSql .= "bill_plan_date='" . date('Y-m-d', strtotime($_POST["edit_bill_plan_date"])) . "' ";
                 $strSql .= "WHERE internal_billing_no='" . $_POST["edit_paraminternal_billing_no"] . "' ";
                 $strSql .= "AND job_type='B' ";
-                //echo $strSql;
+                //echo $strSql . "<br>";
         
                 $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
                 $statement->execute();  
                 $nRecCount = $statement->rowCount();
-                //echo $nRecCount . "<br>";
-        
-        
-                $strSql = "UPDATE TRN_PLANNING_BILLING SET ";
-                $strSql .= "billing_type='" . $_POST["edit_billing_type"] . "', ";
-                $strSql .= "responsed_by='" . $_POST["edit_responsed_by"] . "', ";
-                $strSql .= "planning_date='" . $_POST["edit_planning_cheque_date"] . "' ";
-                $strSql .= "WHERE internal_billing_no='" . $_POST["edit_paraminternal_billing_no"] . "' ";
-                $strSql .= "AND job_type='C' ";
-                //echo $strSql;
-        
-                $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
-                $statement->execute();  
-                $nRecCount = $statement->rowCount();
-                //echo $nRecCount . "<br>";
+                //echo $nRecCount . "<br>";                
                 break;
-            default:
-                $strSql = "UPDATE TRN_PLANNING_BILLING SET ";
-                $strSql .= "billing_type='" . $_POST["edit_billing_type"] . "', ";
-                $strSql .= "responsed_by=NULL, ";
-                $strSql .= "planning_date=NULL ";
-                $strSql .= "WHERE internal_billing_no='" . $_POST["edit_paraminternal_billing_no"] . "' ";
-                $strSql .= "AND job_type='B' ";
-                //echo $strSql;
-        
-                $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
-                $statement->execute();  
-                $nRecCount = $statement->rowCount();
-                //echo $nRecCount . "<br>";
-        
-        
-                $strSql = "UPDATE TRN_PLANNING_BILLING SET ";
-                $strSql .= "billing_type='" . $_POST["edit_billing_type"] . "', ";
-                $strSql .= "responsed_by=NULL, ";
-                $strSql .= "planning_date=NULL ";
-                $strSql .= "WHERE internal_billing_no='" . $_POST["edit_paraminternal_billing_no"] . "' ";
-                $strSql .= "AND job_type='C' ";
-                //echo $strSql;
-        
-                $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
-                $statement->execute();  
-                $nRecCount = $statement->rowCount();
-                //echo $nRecCount . "<br>";
-                break;
-
         }
+
+        // -----------------
+        // แก้ไข ข้อมูล รับเช็ค
+        // -----------------
+        $strSql = "UPDATE TRN_PAYMENT SET ";
+        $strSql .= "payment_type='" . $_POST["edit_payment_type"] . "', ";
+        $strSql .= "payment_responsed_by='" . $_POST["edit_payment_responsed_by"] . "', ";
+        $strSql .= "payment_plan_date='" . date('Y-m-d', strtotime($_POST["edit_payment_plan_date"])) . "' ";
+        $strSql .= "WHERE internal_billing_no='" . $_POST["edit_paraminternal_billing_no"] . "' ";
+        $strSql .= "AND job_type='C' ";
+        //echo $strSql . "<br>";
+
+        $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+        $statement->execute();  
+        $nRecCount = $statement->rowCount();
+        //echo $nRecCount . "<br>";
     }
     catch(PDOException $e)
     {

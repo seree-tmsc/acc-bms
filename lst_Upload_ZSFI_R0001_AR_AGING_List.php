@@ -62,15 +62,15 @@
     
                 echo "</thead>";
                 echo "<tbody>";
-    
+
                 $nI =1;
     
+                ob_start();
                 while ($ds = $statement->fetch(PDO::FETCH_NAMED))
                 {
-                    echo "<tr>";
                     echo "<td class='text-right'>" . $nI . "</td>";
                     echo "<td>" . $ds['Customer'] . "</td>";
-                    echo "<td>" . $ds['Customer Name'] . "</td>";
+                    echo "<td>" . $ds['Customer Name'] ."</td>";
                     echo "<td class='text-center'>" . date('d-m-Y', strtotime($ds['Invoice Date'])) . "</td>";
                     echo "<td>" . $ds['Invoice No'] . "</td>";
                     echo "<td class='text-right'>" . number_format($ds['Local Currency Amount'], 2, ".", ",") . "</td>";
@@ -103,12 +103,47 @@
                         echo "<td class='text-center'></td>";
                     }
                     echo "</tr>";
+
                     $nI++;
                 }
+                ob_end_flush();
     
                 echo "</tbody>";
                 echo "</table>";
                 echo "</div>";
+
+                echo "<h1>Complete ... </h1>";
+
+                /*
+                $aTable = array();
+                $nI =1;
+                while ($ds = $statement->fetch(PDO::FETCH_NAMED))
+                {
+                    //echo $nI . " ". $ds['Customer'] . $ds['Customer Name'] . $ds['Invoice Date'] . $ds['Invoice No'] .$ds['Local Currency Amount'] . $ds['Currency'] . $ds['Due Date'] . "<br />\n";
+                    $aRow = array();
+                    $aRow["customer"] = $ds['Customer'];
+                    $aRow["customer_name"] = $ds['Customer Name'];
+                    $aRow["invoice_date"] = $ds['Invoice Date'];
+                    $aRow["invoice_no"] = $ds['Invoice No'];
+                    $aRow["local_currency_amount"] = $ds['Local Currency Amount'];
+                    $aRow["currency"] = $ds['Currency'];
+                    $aRow["due_date"] = $ds['Due Date'];
+                    
+                    array_push($aTable, $aRow);
+                    $nI++;
+                }
+
+                $nI = 1;
+                foreach ($aTable as $aRow)
+                {
+                    foreach($aRow as $aField)
+                    {
+                        print_r($aField);
+                    }
+                    echo $nI ."<br>";
+                    $nI++;
+                }
+                */
             }
             else
             {

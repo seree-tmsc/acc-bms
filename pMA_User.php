@@ -18,7 +18,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>HR Inventory System [v.1.0]</title>
+                <title>BMS [v.1.0]</title>
                 <link rel="icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
                 <link rel="shortcut icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
 
@@ -43,13 +43,13 @@
                         border: 1px solid silver;
                         font-family: Arial; 
                         font-size: 10pt;
-                        background-color: azure; 
-                        color: silver;
+                        background-color: skyblue; 
+                        color: blue;
                     }
                     .table-hover tbody tr:hover td, .table-hover tbody tr:hover th 
                     {
-                        background-color: deepskyblue;
-                        color: black;
+                        background-color: navy;
+                        color: white;
                         font-weight:bold;
                     }
                 </style>
@@ -96,7 +96,7 @@
         }
         else
         {
-            echo "<script> alert('You are not authorization for this menu ... Please contact your administrator!'); window.location.href='pMain.php'; </script>";
+            echo "<script> alert('คุณไม่ได้รับอนุญาติ ให้ใช้งาน ... โปรดติดต่อ ผู้ดูแลระบบ'); window.location.href='Main.php'; </script>";
         }
     }
 ?>

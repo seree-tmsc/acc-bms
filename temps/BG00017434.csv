@@ -1,0 +1,4 @@
+﻿Customer,Customer Name,Agent PO,Invoice No,Invoice Date,PIC Name,period year,Due Date,Rate,Currency,Local Currency Amount,Document Currency code,Document Currency Amount,Document Currency Current,Document Currency 1-30 Days,Document Currency 31-60 Days,Document Currency 61-90 Days,Local Currency Over 90 Days,Sales Document,Trading Partner,Customer Group
+BG00017434,บริษัท เอเชี่ยน อิโนแอ็ค จำกัด,RM19000125,RB15967157,2019-09-06,MR. KEAITTICHAI  A.,09/2019,2019-11-05,1.00000,THB,1515601.50,THB,1515601.50,1515601.50,0.00,0.00,0.00,0.00,1000197182,,RB1
+BG00017434,บริษัท เอเชี่ยน อิโนแอ็ค จำกัด,RM19000138,RB15967417,2019-09-16,MR. KEAITTICHAI  A.,09/2019,2019-11-15,1.00000,THB,1428450.00,THB,1428450.00,1428450.00,0.00,0.00,0.00,0.00,1000198200,,RB1
+BG00017434,บริษัท เอเชี่ยน อิโนแอ็ค จำกัด,RM19000139,RB15967575,2019-09-20,MR. KEAITTICHAI  A.,09/2019,2019-11-19,1.00000,THB,1077532.80,THB,1077532.80,1077532.80,0.00,0.00,0.00,0.00,1000199124,,RB1

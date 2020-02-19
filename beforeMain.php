@@ -57,13 +57,10 @@
                                                         <?php
                                                             $aMonthValue = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
                                                             $aMonth = array('01. January', '02. February', '03. March', '04. April', '05. May', '06. June', '07. July', '08. August', '09. September', '10. October', '11. November', '12. December');
+
+                                                            /*
                                                             for($nMonth=0; $nMonth<=(date('m')-1); $nMonth++)
                                                             {
-                                                                /*
-                                                                echo (int)date('m') . "<br>";
-                                                                echo $nMonth . "<br>";
-                                                                */
-                                                                
                                                                 if((int)date('m') == $nMonth+1)
                                                                 {
                                                                     echo "<option value='" . $aMonthValue[$nMonth] . "' selected>" . $aMonth[$nMonth]. "</option>";
@@ -73,6 +70,12 @@
                                                                     echo "<option value='" . $aMonthValue[$nMonth] . "'>" . $aMonth[$nMonth]. "</option>";
                                                                 }
                                                             }
+                                                            */
+                                                            for($nMonth=0; $nMonth<=11; $nMonth++)
+                                                            {
+                                                                echo "<option value='" . $aMonthValue[$nMonth] . "'>" . $aMonth[$nMonth]. "</option>";
+                                                            }
+
                                                         ?>
                                                     </select>
                                                 </div>

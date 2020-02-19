@@ -36,8 +36,8 @@
 
             $strSql = "SELECT * ";
             $strSql .= "FROM " . "TRN_AR_" . $_GET['cPeriodYear'] . $_GET['cPeriodMonth'] . " ";
-            $strSql .= "WHERE import_date >= '" . date('Y/m/d', strtotime($_GET['dBeginDate'])) . "' ";
-            $strSql .= "AND import_date <= '" . date('Y/m/d', strtotime($_GET['dEndDate'])) . "' ";
+            $strSql .= "WHERE [Invoice Date] >= '" . date('Y/m/d', strtotime($_GET['dBeginDate'])) . "' ";
+            $strSql .= "AND [Invoice Date] <= '" . date('Y/m/d', strtotime($_GET['dEndDate'])) . "' ";
             if($_GET['cBillCondition'] == 'NB')
             {
                 $strSql .= "AND internal_billing_no is NULL " ;

@@ -23,7 +23,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>HR Inventory System [v.1.0]</title>
+                <title>BMS [v.1.0]</title>
                 <link rel="icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
                 <link rel="shortcut icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
 
@@ -115,9 +115,9 @@
                     </div>
                 </div>
 
-                <!------------------------>
-                <!-- Modal - Close Data -->
-                <!------------------------>
+                <!----------------------------->
+                <!-- Modal - Close Bill Data -->
+                <!----------------------------->
                 <div class="modal fade" id="close_billing_data_modal" tabindex="-1" role="dialog">
                     <!--<div class="modal-dialog modal-lg" role="document">-->
                     <div class="modal-dialog" role="document">
@@ -170,34 +170,57 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <label>ประเภทการวางบิล</label>
-                                            <select name="billing_type" id='billing_type' class="form-control" required>
-                                                <option value='1'>ไปวางบิล-ณ ที่ลูกค้า</option>
-                                                <option value='2'>ไปวางบิล-ทาง ไปรษณีย์</option>
-                                                <option value='3'>ไปวางบิล-ทาง Fax</option>
-                                                <option value='4'>ลูกค้าโอนเงิน</option>
+                                            <select name="bill_type" id='bill_type' class="form-control" required>
+                                                <option value='1'>วางบิล-ที่ลูกค้า</option>
+                                                <option value='2'>วางบิล-ทางไปรษณีย์</option>
+                                                <option value='3'>วางบิล-ทางFax</option>
+                                                <option value='4'>วางบิล-ทางโรงงาน</option>
                                                 <option value='0'>ไม่ต้องวางบิล</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4">
                                             <label>พนักงานที่จะไปวางบิล</label>
-                                            <select name="responsed_by" id='responsed_by' class="form-control" required>
+                                            <select name="bill_responsed_by" id='bill_responsed_by' class="form-control" required>
                                                 <option value='คุณสิงห์ชัย'>คุณสิงห์ชัย</option>
                                                 <option value='คุณวรัญชัย'>คุณวรัญชัย</option>
-                                                <option value='คุณศุภเศรษฐ'>คุณศุภเศรษฐ</option>
+                                                <option value='คุณศุภเศรษฐ์'>คุณศุภเศรษฐ์</option>
+                                                <option value='ทางไปรษณีย์'>ทางไปรษณีย์</option>
+                                                <option value='ทางFax'>ทางFax</option>
+                                                <option value='ทางโรงงาน'>ทางโรงงาน</option>
+                                                <option value='ไม่ต้องวางบิล'>ไม่ต้องวางบิล</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4">
                                             <label>วันที่คาดว่าจะไปวางบิล</label>
-                                            <input type="date" name='planning_bill_date' id='planning_bill_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
+                                            <input type="date" name='bill_plan_date' id='bill_plan_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-4">
+                                            <label>ประเภทการรับเงิน</label>
+                                            <select name="payment_type" id='payment_type' class="form-control" required>
+                                                <option value='1'>รับเช็ด</option>
+                                                <option value='2'>ลูกค้าโอนเงิน</option>
+                                                <option value='3'>ลูกค้าส่งทางไปรษณีย์</option>
+                                            </select>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label>วันที่คาดว่าจะไปรับเช็ค</label>
-                                            <input type="date" name='planning_cheque_date' id='planning_cheque_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
+                                            <label>พนักงานที่จะไปรับเงิน</label>
+                                            <select name="payment_responsed_by" id='payment_responsed_by' class="form-control" required>
+                                                <option value='คุณสิงห์ชัย'>คุณสิงห์ชัย</option>
+                                                <option value='คุณวรัญชัย'>คุณวรัญชัย</option>
+                                                <option value='คุณศุภเศรษฐ์'>คุณศุภเศรษฐ์</option>
+                                                <option value='ทางไปรษณีย์'>ทางไปรษณีย์</option>
+                                                <option value='ทางFax'>ทางFax</option>
+                                                <option value='ทางโรงงาน'>ทางโรงงาน</option>
+                                                <option value='เงินโอน'>เงินโอน</option>
+                                                <option value='ทางไปรษณีย์'>ทางไปรษณีย์</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>วันที่จะไปรับเงิน, โอน</label>
+                                            <input type="date" name='payment_plan_date' id='payment_plan_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
                                         </div>
                                     </div>
 
@@ -207,7 +230,7 @@
                                         <div class="col-lg-10">
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="submit" id='save' class='btn btn-success form-control'>
+                                            <input type="submit" id='add' class='btn btn-success form-control'>
                                         </div>
                                     </div>
                                 </form>                                
@@ -234,7 +257,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title">รายละเอียด - ใบสั่งงาน เพื่อไปวางบิลลูกค้า :</h4>
+                                <h4 class="modal-title">แก้ไขรายละเอียด - ใบสั่งงาน เพื่อไปวางบิลลูกค้า :</h4>
                             </div>
                             
                             <div class="modal-body" id="edit_billing_data_modal_detail">
@@ -243,8 +266,6 @@
                                         <input type="hidden" id="edit_period_month" name="edit_period_month">
                                         <input type="hidden" id="edit_period_year" name="edit_period_year">
 
-                                        <div class="col-lg-4">
-                                        </div>
                                         <div class="col-lg-5">
                                             <label>เลขที่-เอกสารภายใน</label>
                                             <input type="text" id="edit_internal_billing_no" class='form-control' disabled>
@@ -253,6 +274,10 @@
                                         <div class="col-lg-3">
                                             <label>มูลค่า</label>
                                             <input type="number" id="edit_amount" class='form-control' disabled>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>Due Date ช้าสุด</label>
+                                            <input type="text" id="edit_last_due_date" class='form-control' disabled>
                                         </div>
                                     </div>
 
@@ -272,34 +297,55 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <label>ประเภทการวางบิล</label>
-                                            <select name="edit_billing_type" id='edit_billing_type' class="form-control" required>
-                                                <option value='1'>ไปวางบิล-ณ ที่ลูกค้า</option>
-                                                <option value='2'>ไปวางบิล-ทาง ไปรษณีย์</option>
-                                                <option value='3'>ไปวางบิล-ทาง Fax</option>
-                                                <option value='4'>ลูกค้าโอนเงิน</option>
+                                            <select name="edit_bill_type" id='edit_bill_type' class="form-control" required>
+                                                <option value='1'>วางบิล-ที่ลูกค้า</option>
+                                                <option value='2'>วางบิล-ทางไปรษณีย์</option>
+                                                <option value='3'>วางบิล-ทางFax</option>
+                                                <option value='4'>วางบิล-ทางโรงงาน</option>
                                                 <option value='0'>ไม่ต้องวางบิล</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4">
                                             <label>พนักงานที่จะไปวางบิล</label>
-                                            <select name="edit_responsed_by" id='edit_responsed_by' class="form-control" required>
+                                            <select name="edit_bill_responsed_by" id='edit_bill_responsed_by' class="form-control" required>
                                                 <option value='คุณสิงห์ชัย'>คุณสิงห์ชัย</option>
                                                 <option value='คุณวรัญชัย'>คุณวรัญชัย</option>
-                                                <option value='คุณศุภเศรษฐ'>คุณศุภเศรษฐ</option>
+                                                <option value='คุณศุภเศรษฐ์'>คุณศุภเศรษฐ์</option>
+                                                <option value='ทางไปรษณีย์'>ทางไปรษณีย์</option>
+                                                <option value='ทางFax'>ทางFax</option>
+                                                <option value='ทางโรงงาน'>ทางโรงงาน</option>
+                                                <option value='ไม่ต้องวางบิล'>ไม่ต้องวางบิล</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-4">
                                             <label>วันที่คาดว่าจะไปวางบิล</label>
-                                            <input type="date" name='edit_planning_billing_date' id='edit_planning_billing_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
+                                            <input type="date" name='edit_bill_plan_date' id='edit_bill_plan_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-4">
+                                            <label>ประเภทการรับเงิน</label>
+                                            <select name="edit_payment_type" id='edit_payment_type' class="form-control" required>
+                                                <option value='1'>รับเช็ค</option>
+                                                <option value='2'>ลูกค้าโอนเงิน</option>
+                                                <option value='3'>ลูกค้าส่งทางไปรษณีย์</option>
+                                            </select>
                                         </div>
                                         <div class="col-lg-4">
-                                            <label>วันที่คาดว่าจะไปรับเช็ค</label>
-                                            <input type="date" name='edit_planning_cheque_date' id='edit_planning_cheque_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
+                                            <label>พนักงานที่จะไปรับเงิน</label>
+                                            <select name="edit_payment_responsed_by" id='edit_payment_responsed_by' class="form-control" required>
+                                                <option value='คุณสิงห์ชัย'>คุณสิงห์ชัย</option>
+                                                <option value='คุณวรัญชัย'>คุณวรัญชัย</option>
+                                                <option value='คุณศุภเศรษฐ์'>คุณศุภเศรษฐ์</option>
+                                                <option value='โรงงาน'>โรงงาน</option>
+                                                <option value='เงินโอน'>เงินโอน</option>
+                                                <option value='ทางไปรษณีย์'>ทางไปรษณีย์</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>วันที่จะไปรับเงิน,โอน</label>
+                                            <input type="date" name='edit_payment_plan_date' id='edit_payment_plan_date' class='form-control' value='<?php echo date('Y-m-d');?>' required>
                                         </div>
                                     </div>
 
@@ -309,7 +355,7 @@
                                         <div class="col-lg-10">
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="submit" id='edit_save' class='btn btn-success form-control'>
+                                            <input type="submit" id='edit' class='btn btn-success form-control'>
                                         </div>
                                     </div>
                                 </form>                                
@@ -382,44 +428,59 @@
                             });
                         });
 
-
-
-
-
-
-
-
-                        //alert($('select#billing_type').children('option:selected').val());
-                        $('select#billing_type').change(function(){
+                        // -------------------------------------------
+                        // เลือกประเภทการวางบิล แล้ว control dropdown อื่นๆ
+                        // -------------------------------------------
+                        //alert($('select#billing_type').children('option:selected').val());                        
+                        $('select#bill_type').change(function(){
                             //alert($(this).children('option:selected').val());
-                            if($(this).children('option:selected').val() != 1)
+                            if($(this).children('option:selected').val() == 0)
                             {
-                                $('#responsed_by').attr('disabled', true);
-                                $('#planning_billing_date').attr('disabled', true);
-                                $('#planning_cheque_date').attr('disabled', true);
+                                $('#bill_responsed_by').val('ไม่ต้องวางบิล');
+                                $('#bill_plan_date').attr('disabled', true);
                             }
                             else
                             {
-                                $('#responsed_by').attr('disabled', false);
-                                $('#planning_billing_date').attr('disabled', false);
-                                $('#planning_cheque_date').attr('disabled', false);
+                                //$('#parambill_responsed_by').val($('#bill_responsed_by').children('option:selected').val());
+                                $('#bill_plan_date').attr('disabled', false);
+                            }
+                        });
+
+                        $('select#payment_type').change(function(){
+                            if($(this).children('option:selected').val() == 2)
+                            {
+                                $('#payment_responsed_by').val('เงินโอน');
+                            }
+                        });
+
+                        // -------------------------------------------
+                        // เลือกประเภทการรับเช็ค แล้ว control dropdown อื่นๆ
+                        // -------------------------------------------
+                        $('select#edit_bill_type').change(function(){
+                            //alert($(this).children('option:selected').val());
+                            if($(this).children('option:selected').val() == 0)
+                            {
+                                $('#edit_bill_responsed_by').val('ไม่ต้องวางบิล');
+                                $('#edit_bill_plan_date').attr('disabled', true);
+                                /*
+                                var now = new Date();
+                                var dDay = ("0" + now.getDate()).slice(-2);
+                                var dMonth = ("0" + (now.getMonth() + 1)).slice(-2);
+                                var dToday = now.getFullYear()+"-"+(dMonth)+"-"+(dDay) ;
+                                $('#edit_bill_plan_date').val(dToday);
+                                */
+                            }
+                            else
+                            {
+                                $('#edit_bill_plan_date').attr('disabled', false);
                             }                            
                         });
 
-                        $('select#edit_billing_type').change(function(){
-                            //alert($(this).children('option:selected').val());
-                            if($(this).children('option:selected').val() != 1)
+                        $('select#edit_payment_type').change(function(){
+                            if($(this).children('option:selected').val() == 2)
                             {
-                                $('#edit_responsed_by').attr('disabled', true);
-                                $('#edit_planning_billing_date').attr('disabled', true);
-                                $('#edit_planning_cheque_date').attr('disabled', true);
+                                $('#edit_payment_responsed_by').val('เงินโอน');
                             }
-                            else
-                            {
-                                $('#edit_responsed_by').attr('disabled', false);
-                                $('#edit_planning_billing_date').attr('disabled', false);
-                                $('#edit_planning_cheque_date').attr('disabled', false);
-                            }                            
                         });
 
                         /*------------------------------*/
@@ -482,29 +543,29 @@
                         /*-------------------------------*/
                         $('.close_billing_data').click(function()
                         {
-                            //alert('You click class close_data');
-
-                            //var doc_no = $(this).attr("doc_no");
-                            //var cPeriodMonth = $('#cPeriodMonth').html();
-                            //var cPeriodYear = $('#cPeriodYear').html();
-
-                            //alert(doc_no);
+                            /*
+                            var doc_no = $(this).attr("doc_no");
+                            var cPeriodMonth = $('#cPeriodMonth').html();
+                            var cPeriodYear = $('#cPeriodYear').html();
+                            alert(doc_no);
+                            */
 
                             $('#internal_billing_no').val($(this).attr("doc_no"));
                             $('#amount').val($(this).attr("amt"));
                             $('#last_due_date').val($(this).attr("last_due_date"));
                             $('#customer').val($(this).attr("cust"));
                             $('#customer_name').val($(this).attr("cust_name"));
-                            //$('#dBeginDate').val($(this).attr("from_date"));
-                            //$('#dEndDate').val($(this).attr("to_date"));
                             $('#period_month').val($(this).attr("period_month"));
                             $('#period_year').val($(this).attr("period_year"));
 
                             $('#paraminternal_billing_no').val($(this).attr("doc_no"));
                             $('#paramamount').val($(this).attr("amt"));
+                            $('#paramlast_due_date').val($(this).attr("last_due_date"));
                             $('#paramcustomer').val($(this).attr("cust"));
                             $('#paramcustomer_name').val($(this).attr("cust_name"));
-                            $('#paramlast_due_date').val($(this).attr("last_due_date"));
+
+                            //$('#parambill_responsed_by').val($('#bill_responsed_by').children('option:selected').val());
+                            //$('#parampayment_responsed_by').val($('#payment_responsed_by').children('option:selected').val());
 
                             $('#close_billing_data_modal').modal('show');
 
@@ -543,9 +604,11 @@
                                 url: "lst_Billing_Document_Close_Data.php",
                                 method: "post",
                                 data: $('#close_billing_data_form').serialize(),
+                                /*
                                 beforeSend:function(){
                                     $('#edit').val('Edit...')
                                 },
+                                */
                                 success: function(data){
                                     if (data == '') {
                                         $('#close_billing_data_form')[0].reset();
@@ -561,7 +624,7 @@
                             });
                         });
 
-                        $('.edit_billing_data').click(function(){
+                        $('.edit_billing_data').click(function(){                            
                             var doc_no = $(this).attr("doc_no");
                             //alert(doc_no);
 
@@ -569,8 +632,7 @@
                             $('#edit_amount').val($(this).attr("amt"));
                             $('#edit_customer').val($(this).attr("cust"));
                             $('#edit_customer_name').val($(this).attr("cust_name"));
-                            $('#edit_period_month').val($(this).attr("period_month"));
-                            $('#edit_period_year').val($(this).attr("period_year"));
+                            $('#edit_last_due_date').val($(this).attr("last_due_date"));
 
                             $('#edit_paraminternal_billing_no').val($(this).attr("doc_no"));
 
@@ -581,13 +643,25 @@
                                 dataType: "json",
                                 success: function(data)
                                 {
-                                    //alert(JSON.stringify(data));
+                                    /*
+                                    alert('success');
+                                    alert(JSON.stringify(data));
+                                    */
+                                    $('#edit_bill_type').val(data.bill_type);
+                                    $('#edit_bill_responsed_by').val(data.bill_responsed_by);
+                                    $('#edit_bill_plan_date').val(data.bill_plan_date);
 
-                                    $('#edit_billing_type').val(data.billing_type);
-                                    $('#edit_responsed_by').val(data.responsed_by);
-                                    $('#edit_planning_billing_date').val(data.planning_billing_date);
-                                    $('#edit_planning_cheque_date').val(data.planning_cheque_date);
+                                    $('#edit_payment_type').val(data.payment_type);
+                                    $('#edit_payment_responsed_by').val(data.payment_responsed_by);
+                                    $('#edit_payment_plan_date').val(data.payment_plan_date);
+
+                                    //$('#paramedit_bill_responsed_by').val($('#edit_bill_responsed_by').children('option:selected').val());
+                                    //$('#paramedit_payment_responsed_by').val($('#edit_payment_responsed_by').children('option:selected').val());
+                                    
                                     $('#edit_billing_data_modal').modal('show');
+                                },
+                                error: function(){
+                                    //alert('error');
                                 }
                             });
                         })
@@ -601,9 +675,11 @@
                                 url: "lst_Billing_Document_Edit_Data.php",
                                 method: "post",
                                 data: $('#edit_billing_data_form').serialize(),
+                                /*
                                 beforeSend:function(){
-                                    $('#edit').val('Edit...')
+                                    $('#edit').val('Editing...')
                                 },
+                                */
                                 success: function(data){
                                     if (data == '') {
                                         $('#edit_billing_data_form')[0].reset();

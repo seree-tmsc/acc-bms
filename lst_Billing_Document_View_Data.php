@@ -35,11 +35,12 @@
                 $cOutput .= "<table class='table table-bordered'>";
                 $cOutput .= "<thead style='background-color:CornflowerBlue;'>";
                 $cOutput .= "<tr>";
-                $cOutput .= "<th style='width:10%;' class='text-center'>No.</th>";
+                $cOutput .= "<th style='width:7%;' class='text-center'>No.</th>";
                 $cOutput .= "<th style='width:20%;' class='text-center'>Invoice Date</th>";
                 $cOutput .= "<th style='width:20%;' class='text-center'>Invoice No.</th>";
-                $cOutput .= "<th style='width:25%;' class='text-center'>Amount</th>";
-                $cOutput .= "<th style='width:25%;' class='text-center'>Due Date</th>";
+                $cOutput .= "<th style='width:20%;' class='text-center'>Amount</th>";
+                $cOutput .= "<th style='width:20%;' class='text-center'>Due Date</th>";
+                $cOutput .= "<th style='width:13%;' class='text-center'>CR-Term</th>";
                 $cOutput .= "</tr>";
                 $cOutput .= "</thead>";
                 $cOutput .= "<tbody>";                
@@ -50,6 +51,7 @@
             $cOutput .= "<td class='text-center'>" . $ds['Invoice No'] . "</td>";
             $cOutput .= "<td class='text-right'>" . number_format($ds['Document Currency Amount'], 2, '.', ',') . "</td>";
             $cOutput .= "<td class='text-center'>" . date('d-m-Y', strtotime($ds['Due Date'])) . "</td>";
+            $cOutput .= "<td class='text-center'>" . $ds['credit_term'] . "</td>";
             $cOutput .= "</tr>";
 
             $nI++;

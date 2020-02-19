@@ -32,6 +32,11 @@
 <link rel="stylesheet" href="../../vendors/DataTables/datatables.css">
 <script src="../../vendors/DataTables/datatables.js"></script>
 
+<!-- Select2 -->
+<link rel="stylesheet" href="../../vendors/select2-4.0.10/dist/css/select2.css">
+<script src="../../vendors/select2-4.0.10/dist/js/select2.full.js"></script>
+<script src="../../vendors/select2-4.0.10/dist/js/select2.js"></script>
+
 <!-- Full Calendar -->
 <link href="../../vendors/fullcalendar/fullcalendar.min.css" rel="stylesheet" />    
 <link href="../../vendors/fullcalendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />    

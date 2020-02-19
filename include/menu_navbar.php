@@ -42,6 +42,7 @@
                                 Upload ข้อมูล AR-Aging By Invoice Date
                             </a>
                         </li>
+                        <li class="divider">
                         <li>                             
                             <a href="upload_ZSFI_R0001_AR_AGING_ByCust_Criteria.php" >
                                 <span class="fa fa-upload fa-lg" style="color:navy"></span> 
@@ -85,9 +86,16 @@
                         </li>
                         <li class="divider">
                         <li>
-                            <a href="created_plan_by_AI_criteria.php">
+                            <a href="cancel_bill_planning_criteria.php">
                                 <span class='fa fa-edit fa-lg' style="color:navy"></span>
-                                การจัดการใบวางบิล [By Computer]
+                                ยกเลิก - การวางแผนการวางบิล
+                            </a>
+                        </li>
+                        <li class="divider">
+                        <li>
+                            <a href="Billing_Management_V2_Criteria.php">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                การจัดการใบวางบิล [By Manual V.2]
                             </a>
                         </li>
                     </ul>
@@ -105,8 +113,46 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="pMA_User.php">
-                                <span class='fa fa-address-card-o' style="color:blue"></span>
+                                <span class='fa fa-address-card-o' style="color:navy"></span>
                                 การจัดการผู้ใช้งาน
+                            </a>
+                        </li>
+                        <li class="divider">
+                        <li>
+                            <a href="Bill_Condition_Main.php">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                ข้อมูล เงื่อนไขการรับวางบิล
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Create_Customer_Bill_Schedule_Criteria.php">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                สร้าง เงื่อนไขการรับวางบิล แบบรายปี
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Modify_Customer_Bill_Schedule_Criteria.php">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                แก้ไข เงื่อนไขการรับวางบิล
+                            </a>
+                        </li>
+                        <li class="divider">
+                        <li>
+                            <a href="Bill_Payment_Main.php">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                ข้อมูล เงื่อนไขการจ่ายเงิน
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Create_Customer_Payment_Schedule_Criteria.php">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                สร้าง เงื่อนไขการจ่ายเงิน แบบรายปี
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class='fa fa-edit fa-lg' style="color:navy"></span>
+                                แก้ไข เงื่อนไขการจ่ายเงิน
                             </a>
                         </li>
                     </ul>

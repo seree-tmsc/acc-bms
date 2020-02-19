@@ -82,8 +82,8 @@
                     echo "<td>" . $ds['Customer Name'] . "</td>";
                     echo "<td class='text-center'>" . $ds['internal_billing_no'] . "</td>";
                     echo "<td class='text-right'>" . number_format($ds['AMT'], 2, ".", ",") . "</td>";
-                    echo "<td class='text-center'>" . date('d/m/Y', strtotime($ds['internal_billing_no_created_date'])) . "</td>";
-                    echo "<td class='text-center'>" . date('d/m/Y', strtotime($ds['last_due_date'])) . "</td>";
+                    echo "<td class='text-center'>" . date('Y/m/d', strtotime($ds['internal_billing_no_created_date'])) . "</td>";
+                    echo "<td class='text-center'>" . date('Y/m/d', strtotime($ds['last_due_date'])) . "</td>";
 
                     switch($_POST['cBillStatus'])
                     {

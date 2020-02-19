@@ -18,7 +18,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>HR Inventory System [v.1.0]</title>
+                <title>BMS [v.1.0]</title>
                 <link rel="icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
                 <link rel="shortcut icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
 
@@ -29,7 +29,7 @@
                 <div class="container">
                     <br>                    
                     <?php require_once("include/submenu_navbar.php"); ?>
-                    <h6 style='color:silver; text-align:right;'>Billing Period : <?php echo $_SESSION['ses_cMonth'].'-'.$_SESSION['ses_cYear']."<br>"; ?></h6>
+                    <h6 style='color:red; text-align:right;'>Billing Period : <?php echo $_SESSION['ses_cMonth'].'-'.$_SESSION['ses_cYear']."<br>"; ?></h6>
 
                     <div class="row">
                         <div class="col-lg-4 col-lg-offset-4">
@@ -39,27 +39,24 @@
                                 </div>
 
                                 <div class="panel-body">
-                                    <form method='post' action='lst_Billing_Document_Main.php'>
+                                    <form method='post' action='created_plan_by_AI_main.php'>
 
                                         <div class="row col-lg-12">
                                             <label>ประเภทใบวางบิล</label>
                                             <select name="cBillStatus" class="form-control">
                                                 <option value="N">ใบวางบิล ประเภทที่ยังไม่กำหนดผู้วางบิล</option>
-                                                <option value="Y">ใบวางบิล ประเภทที่กำหนดผู้วางบิลแล้ว</option>
-                                                <option value="A">ใบวางบิล ทุกประเภท</option>
                                             </select>
                                         </div>
                                         
                                         <!--------------->
                                         <!-- ปุ่ม Submit -->
                                         <!--------------->
-                                        <div class="row col-lg-12">
+                                        <div class="row col-lg-12">                                            
                                             <div class="col-lg-7">
                                             </div>
 
                                             <div class="col-lg-5">
                                                 <label>&nbsp</label>
-                                                <!--<input type="submit" id='btnInsert' class='btn btn-success form-control'>-->
                                                 <input type="submit" class='btn btn-success form-control'>
                                             </div>
                                         </div>
@@ -95,7 +92,7 @@
         }
         else
         {
-            echo "<script> alert('You are not authorization for this menu ... Please contact your administrator'); window.location.href='pMain.php'; </script>";
+            echo "<script> alert('คุณไม่ได้รับอนุญาติ ให้ใช้งาน ... โปรดติดต่อ ผู้ดูแลระบบ'); window.location.href='Main.php'; </script>";
         }
     }
 ?>

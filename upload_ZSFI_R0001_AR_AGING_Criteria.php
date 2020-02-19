@@ -18,7 +18,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>TMSC TPDT System V.1.0</title>
+                <title>BMS [v.1.0]</title>
                 <link rel="icon" type="image/png"  href="images/tmsc-logo-64x32.png">
                 <style>
                     /* --- CSS for Today of FullCalendar --- */
@@ -53,7 +53,7 @@
                 <div class="container">
                     <br>
                     <?php require_once("include/submenu_navbar.php"); ?>
-                    <h6 style='color:silver; text-align:right;'>Billing Period : <?php echo $_SESSION['ses_cMonth'].'-'.$_SESSION['ses_cYear']."<br>"; ?></h6>
+                    <h6 style='color:red/; text-align:right;'>Billing Period : <?php echo $_SESSION['ses_cMonth'].'-'.$_SESSION['ses_cYear']."<br>"; ?></h6>
 
                     <div class="row">
                         <div class="col-lg-4">
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="col-lg-8">
-                            <div class="panel panel-primary" id="panel-header">
+                            <div class="panel panel-success" id="panel-header">
                                 <div class="panel-heading">
                                     Upload ข้อมูล AR-Arging By Invoice Date
                                 </div>
@@ -79,6 +79,18 @@
                                     </form>
                                 </div>
                             </div>
+
+                            <!----------->
+                            <!-- Table -->
+                            <!----------->
+                            <div class="panel panel-success" id="panel-header">
+                                <div class="panel-heading" > 
+                                    Invoice Data
+                                </div>
+
+                                <div class="panel-body invoice_data" style='background-color: honeydew;'>
+                                </div>
+                            </div>
                         </div>
                     </div>                    
                 </div>
@@ -90,9 +102,7 @@
 
                             // กำหนดความสูงของ Calendar
                             contentHeight: 360,
-
-                            editable:true,
-
+                            
                             header:{
                                 left:'prev,next today',
                                 center:'title',
@@ -102,75 +112,101 @@
                             
                             events: 'loadDataFrom_TRN_UPLOAD_STATUS.php',
 
-                            /*
-                            events: [{
-                                title: '100',
-                                start: '2019-08-06',
-                                end: '2019-08-06',
-                                color: 'gray', // override!
-                                textColor: 'white'
-                            },
-                            {
-                                title: '65',
-                                start: '2019-08-07',
-                                allDay: true,
-                                color: 'gray', // override!
-                                textColor: 'white'
-                            },
-                            {
-                                title: '76',
-                                start: '2019-08-08',
-                                allDay: true,
-                                color: 'gray', // override!
-                                textColor: 'white'
-                            },
-                            {
-                                title: '88',
-                                start: '2019-08-09',
-                                allDay: true,
-                                color: 'gray', // override!
-                                textColor: 'white'
-                            },
-                            {
-                                title: '519',
-                                start: '2019-07-18',
-                                end: '2019-07-18',
-                                color: 'gray', // override!
-                                textColor: 'white'
-                            }],
-                            */
-                            
                             selectable:true,
 
                             selectHelper:true,
 
                             select: function(start, end, allDay)
                             {
-                                /*
                                 var dCurDate = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                                alert('You select ' + dCurDate);
-                                */
+                                var dDayOfWeek = $.fullCalendar.formatDate(start, "d");
+                                var nPeriod_Year = '<?php echo $_SESSION['ses_cYear']?>';
+                                var nPeriod_Month = '<?php echo $_SESSION['ses_cMonth']?>';
 
-                                /*
+                                console.log('You Select Invoice Date = ' + dCurDate);
+                                console.log('Day of Week = ' + dDayOfWeek);
+                                console.log('Period Year = ' + nPeriod_Year);
+                                console.log('Period Month = ' + nPeriod_Month);
+
                                 $.ajax({
-                                    url:"jobTable_Create.php",
+                                    url:"ajax_query_invoice_data.php",
                                     type:"POST",
-                                    data:{dCurDate: dCurDate},
+                                    data:{dCurDate: dCurDate, period_year: nPeriod_Year, period_month: nPeriod_Month},
                                     success: function(data){
-                                        $('div.bill-planning').html(data);
+                                        $('div.invoice_data').html(data);
+                                        $('#tableInvoiceData').DataTable({
+
+                                            "footerCallback": function ( row, data, start, end, display ) 
+                                            {
+                                                var api = this.api(), data;
+                                    
+                                                // Remove the formatting to get integer data for summation
+                                                var intVal = function ( i ) {
+                                                    return typeof i === 'string' ?
+                                                        i.replace(/[\$,]/g, '')*1 :
+                                                        typeof i === 'number' ?
+                                                            i : 0;
+                                                };
+                                    
+                                                // Total over all pages
+                                                total = api
+                                                    .column( 4 )
+                                                    .data()
+                                                    .reduce( function (a, b) {
+                                                        return intVal(a) + intVal(b);
+                                                    }, 0 );
+                                    
+                                                // Total over this page
+                                                pageTotal = api
+                                                    .column( 4, { page: 'current'} )
+                                                    .data()
+                                                    .reduce( function (a, b) {
+                                                        return intVal(a) + intVal(b);
+                                                    }, 0 );
+                                    
+                                                // Update footer
+                                                total = parseFloat(total.toFixed(2))
+                                                $( api.column( 4 ).footer() ).html(
+                                                    '<u style="color:red; text-align:right;">'+  total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '</u>'
+                                                );
+
+                                            }
+
+                                        });
                                         calendar.fullCalendar('refetchEvents');
                                     },
                                     error: function(){
                                         alert('Error ... [ajax] !');
                                     }
                                 })
-                                */
                             },
 
                             editable: false,
 
+                            eventClick: function(event, jsEvent, view, resource) 
+                            {
+                                console.log(event);
+                                /*
+                                alert('Event: ' + event.title);
+                                alert('Coordinates:X= ' + jsEvent.pageX + ',Y= ' + jsEvent.pageY);
+                                
+                                alert('View: ' + view.name);
+                                alert('View: ' + view.title);
+                                */
+                            },
+
                             dayRender: function (date, cell) {
                                 cell.css("background-color", "honeydew");
+                            },
+
+                            dayClick: function(date, jsEvent, view) {
+                                /*
+                                alert('Clicked on: ' + date.format());
+                                alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                                alert('Current view: ' + view.name);                                
+                                //change the day's background color just for fun
+                                $(this).css('background-color', 'red');
+                                */
                             }
 
                         });
@@ -181,7 +217,7 @@
         }
         else
         {
-            echo "<script> alert('You are not authorization for this menu ... Please contact your administrator!'); window.location.href='pMain.php'; </script>";
+            echo "<script> alert('คุณไม่ได้รับอนุญาติ ให้ใช้งาน ... โปรดติดต่อ ผู้ดูแลระบบ'); window.location.href='Main.php'; </script>";
         }
     }
 ?>

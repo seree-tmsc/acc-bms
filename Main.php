@@ -26,7 +26,7 @@
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>HR Inventory System [v.1.0]</title>
+                <title>BMS [v.1.0]</title>
                 <link rel="icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
                 <link rel="shortcut icon" href="images/tmsc-logo-128.png" type="image/x-icon" />
                 
@@ -67,8 +67,10 @@
                         border: 1px solid silver;
                         font-family: Arial; 
                         font-size: 8pt;
-                        background-color:salmon; 
-                        color:darkred
+                        /*background-color:salmon;*/
+                        background-color:peachpuff;
+                        /*color:darkred*/
+                        color: black;
                     }
                     .table tbody tr td
                     {
@@ -96,7 +98,7 @@
                     <?php require_once("include/menu_navbar.php"); ?>
                     
                     <!--<h6 style='color:silver; text-align:right;'>Billing Period : <?php //echo $_POST['cMonth'].'-'.$_POST['cYear']."<br>"; ?></h6>-->
-                    <h6 style='color:silver; text-align:right;'>Billing Period : <?php echo $_SESSION['ses_cMonth'].'-'.$_SESSION['ses_cYear']."<br>"; ?></h6>
+                    <h6 style='color:red; text-align:right;'>Billing Period : <?php echo $_SESSION['ses_cMonth'].'-'.$_SESSION['ses_cYear']."<br>"; ?></h6>
                     
                     <!-- Begin content page-->
                     <div class="row">
@@ -172,6 +174,8 @@
                         var calendar = $('#calendar').fullCalendar(
                         {
                             schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+
+                            eventOrder: "start, id",
                             
                             // กำหนดความสูงของ Calendar
                             contentHeight: 360,
@@ -185,7 +189,7 @@
                                 right:''
                             },
                             
-                            events: 'loadDataFrom_TRN_PLAN.php',
+                            events: 'loadDataFrom_TRN_BILL_and_TRN_PAYMENT.php',
                             
                             selectable:true,
 
@@ -277,7 +281,6 @@
                             dayRender: function (date, cell) {
                                 cell.css("background-color", "oldlace");
                             }
-
                         });                        
 
                     });

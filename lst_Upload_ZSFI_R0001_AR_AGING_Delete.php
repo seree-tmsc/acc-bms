@@ -5,6 +5,8 @@
 
         $strSql = "DELETE FROM TRN_AR_" . $_POST['cPeriodYear'] . $_POST['cPeriodMonth'] . " ";
         $strSql .= "WHERE Customer='" . $_POST["customer"] . "' ";
+        $strSql .= "AND internal_billing_no IS NULL ";
+        $strSql .= "AND billing_status='N' ";
         //echo $strSql . "<br>";
 
         $statement = $conn->prepare( $strSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));  

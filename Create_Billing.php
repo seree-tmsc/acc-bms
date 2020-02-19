@@ -56,12 +56,9 @@
                 while ($ds = $statement->fetch(PDO::FETCH_NAMED))
                 {
                     $nRow++;
-                    //$cSummaryResult .= $nRow . ') ' .$ds['Customer'] . ' ' . $ds['Customer Name'] . ", ";
-                    $cSummaryResult .= $nRow . ') ' . $ds['Customer Name'] . ", ";
+                    $cSummaryResult .= $nRow . ') ' . $ds['Customer'] . $ds['Customer Name'] . ", ";
                 }
-
-                echo "<script>alert('" . $cSummaryResult . "');</script>";
-
+                echo "<script>alert('" . $cSummaryResult . "')</script>";
 
                 /**--------------------------------------------------- */
                 /**--- ค้นหาอีกรอบ ว่าต้องสรุปใบวางบิล ของ ลูกค้าเจ้าไหนบ้าง --- */
@@ -99,6 +96,8 @@
                         $strSql1 .= "FROM " . "TRN_AR_" . $_GET['cYear'] . $_GET['cMonth'] ." ";
                         $strSql1 .= "WHERE [Invoice Date] >= '" . $_POST['dBeginDate'] . "' ";
                         $strSql1 .= "AND [Invoice Date] <= '" . $_POST['dEndDate'] . "' ";
+                        $strSql1 .= "AND billing_status = 'N' ";
+                        $strSql1 .= "AND internal_billing_no is NULL ";
                         $strSql1 .= "AND Customer = '" . $ds['Customer']. "' ";
                         $strSql1 .= "GROUP BY YEAR([Due Date]), MONTH([Due Date]) ";
                         $strSql1 .= "ORDER BY YEAR([Due Date]), MONTH([Due Date]) ";
@@ -109,9 +108,9 @@
                         $nRecCount1 = $statement1->rowCount();
                         //echo $nRecCount1 . " records <br>";
                         
-                        /**------------------------------ */
-                        /**---  ประมวลผล ที่ละ due date --- */
-                        /**-------------------------------*/
+                        /**------------------------------------ */
+                        /**---  ประมวลผล ที่ละ due date group --- */
+                        /**-------------------------------------*/
                         For($nI=1; $nI<=$nRecCount1; $nI++)
                         {
                             /**--------------------------------------------------------------- */
@@ -124,7 +123,11 @@
                             $strSql2 .= "SET internal_billing_no = '" . $ds['Customer'] .  "' + CAST(Year(CURRENT_TIMESTAMP) as char(4)) + RIGHT('0' + RTRIM(MONTH(CURRENT_TIMESTAMP)), 2) + RIGHT('0' + RTRIM(DAY(CURRENT_TIMESTAMP)), 2) + '-' + '" . strval($nI) . "',";
                             $strSql2 .= "internal_billing_no_created_date = CURRENT_TIMESTAMP, ";
                             $strSql2 .= "internal_billing_no_created_by = ' " . $_POST['emp_code'] . "' ";
-                            $strSql2 .= "WHERE Customer = '" . $ds['Customer'] . "' ";
+                            $strSql2 .= "WHERE [Invoice Date] >= '" . $_POST['dBeginDate'] . "' ";
+                            $strSql2 .= "AND [Invoice Date] <= '" . $_POST['dEndDate'] . "' ";
+                            $strSql2 .= "AND billing_status = 'N' ";
+                            $strSql2 .= "AND internal_billing_no is NULL ";
+                            $strSql2 .= "AND Customer = '" . $ds['Customer'] . "' ";
                             $strSql2 .= "AND YEAR([Due Date]) = " . $ds1['due_year'] . " ";
                             $strSql2 .= "AND MONTH([Due Date]) = " . $ds1['due_month'] . " ";
                             //echo $strSql2 . "<br>";
@@ -138,7 +141,9 @@
                             {
                                 $strSql3 = "SELECT [Due Date] ";
                                 $strSql3 .= "FROM TRN_AR_" . $_GET['cYear'] . $_GET['cMonth'] . " ";
-                                $strSql3 .= "WHERE Customer = '" . $ds['Customer'] . "' ";
+                                $strSql3 .= "WHERE [Invoice Date] >= '" . $_POST['dBeginDate'] . "' ";
+                                $strSql3 .= "AND [Invoice Date] <= '" . $_POST['dEndDate'] . "' ";
+                                $strSql3 .= "AND Customer = '" . $ds['Customer'] . "' ";
                                 $strSql3 .= "AND YEAR([Due Date]) = " . $ds1['due_year'] . " ";
                                 $strSql3 .= "AND MONTH([Due Date]) = " . $ds1['due_month'] . " ";
                                 $strSql3 .= "GROUP BY [Due Date] ";
@@ -154,7 +159,10 @@
                                     $ds3 = $statement3->fetch(PDO::FETCH_NAMED);
                                     $strSql4 = "UPDATE " . "TRN_AR_" . $_GET['cYear'] . $_GET['cMonth'] ." ";
                                     $strSql4 .= "SET last_due_date ='" . $ds3['Due Date'] . "' ";
-                                    $strSql4 .= "WHERE Customer = '" . $ds['Customer'] . "' ";
+                                    $strSql4 .= "WHERE [Invoice Date] >= '" . $_POST['dBeginDate'] . "' ";
+                                    $strSql4 .= "AND [Invoice Date] <= '" . $_POST['dEndDate'] . "' ";
+                                    $strSql4 .= "AND billing_status = 'N' ";
+                                    $strSql4 .= "AND Customer = '" . $ds['Customer'] . "' ";
                                     $strSql4 .= "AND YEAR([Due Date]) = " . $ds1['due_year'] . " ";
                                     $strSql4 .= "AND MONTH([Due Date]) = " . $ds1['due_month'] . " ";
                                     //echo $strSql4 . "<br>";
@@ -180,7 +188,8 @@
                             }
                         }
                     }
-                    echo "<script>alert('Complete ... !');window.location.href='Create_Billing_Criteria.php';</script>";
+                    //echo "<script>alert('Complete ... !');window.location.href='Create_Billing_Criteria.php';</script>";
+                    echo "<script>alert('Complete ... !');window.location.href='Main.php';</script>";
                 }
                 else
                 {
